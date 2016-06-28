@@ -1,0 +1,6 @@
+gym.egg == info
+Keras == 0.3.1
+numpy == 1.11.0
+pygame == 1.9.2a0
+pymunk == 4.0.0
+gym == 0.1.3
