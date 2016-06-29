@@ -97,7 +97,7 @@ class BechoNet(object):
         self.loss_log = []
 
     def save_weights_file(self, steps=0):
-        filename = self.weights_file + str(steps) + '.h5'
+        filename = self.weights_file + '-' + str(steps) + '.h5'
         self.model.save_weights(filename, overwrite=True)
 
 
