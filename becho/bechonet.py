@@ -67,7 +67,7 @@ class BechoNet(object):
 
         if self.load_weights and self.weights_file is not None:
             if self.verbose:
-                print("Loading weights from %s" % self.weights_File)
+                print("Loading weights from %s" % self.weights_file)
             model.load_weights(self.weights_file)
 
         return model
