@@ -96,8 +96,9 @@ class BechoNet(object):
                 wr.writerow(loss_item)
         self.loss_log = []
 
-    def save_weights_file(self):
-        self.model.save_weights(self.weights_file, overwrite=True)
+    def save_weights_file(self, steps=0):
+        filename = self.weights_file + str(steps) + '.h5'
+        self.model.save_weights(filename, overwrite=True)
 
 
 class LossHistory(Callback):

@@ -13,7 +13,7 @@ actions = 4
 
 # Just change these.
 train_or_show = 'show'
-weights_file = 'lunar-512_2.h5'
+weights_file = 'lunarlander'
 
 # Depends on the above.
 if train_or_show == 'train':
