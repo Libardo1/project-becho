@@ -100,7 +100,7 @@ class ProjectBecho(object):
         if self.model.save_weights and self.model.weights_file is not None:
             if self.steps % self.save_steps == 0 and self.steps > 0:
                 print("Saving weights.")
-                self.model.save_weights_file(self.steps)
+                self.model.save_weights_file()
 
         self.steps += 1
 
