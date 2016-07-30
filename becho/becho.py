@@ -34,7 +34,7 @@ class ProjectBecho(object):
             self.epsilon_divider = self.frames
         else:
             self.has_terminal = True
-            self.epslion_divider = self.episodes
+            self.epsilon_divider = self.episodes
 
         if self.verbose:
             print(
