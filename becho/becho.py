@@ -31,7 +31,7 @@ class ProjectBecho(object):
         # in this case, not by "terminal" or episode.
         if self.frames != 0:
             self.has_terminal = False
-            self.epslion_divider = self.frames
+            self.epsilon_divider = self.frames
         else:
             self.has_terminal = True
             self.epslion_divider = self.episodes
@@ -94,7 +94,7 @@ class ProjectBecho(object):
         # Decrement epsilon over time.
         if self.epsilon > self.min_epsilon:
             if (self.has_terminal and terminal) or self.has_terminal is False:
-                self.epsilon -= (1 / self.epslion_divider)
+                self.epsilon -= (1 / self.epsilon_divider)
 
         # Save weights?
         if self.model.save_weights and self.model.weights_file is not None:
