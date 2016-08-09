@@ -1,6 +1,6 @@
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Dropout
-from keras.optimizers import RMSprop
+from keras.optimizers import RMSprop, Adam, Adadelta
 from keras.callbacks import Callback
 import csv
 
@@ -13,6 +13,10 @@ class BechoNet(object):
         self.nodes_2 = kwargs.get('nodes_2', 150)
         self.num_actions = kwargs.get('num_actions')
         self.num_inputs = kwargs.get('num_inputs')
+
+        self.optimizer = kwargs.get('optimizer', 'rmsprop')
+        self.activation = kwargs.get('activation', 'relu')
+        self.learning_rate = kwargs.get('learning_rate', 0.0001)
 
         self.load_weights = kwargs.get('load_weights', False)
         self.save_weights = kwargs.get('save_weights', False)
@@ -50,20 +54,25 @@ class BechoNet(object):
             self.nodes_1, init='lecun_uniform',
             input_shape=(self.num_inputs,)
         ))
-        model.add(Activation('relu'))
-        model.add(Dropout(0.2))
+        model.add(Activation(self.activation))
 
         # Second layer.
         model.add(Dense(self.nodes_2, init='lecun_uniform'))
-        model.add(Activation('relu'))
-        model.add(Dropout(0.2))
+        model.add(Activation(self.activation))
 
         # Output layer.
         model.add(Dense(self.num_actions, init='lecun_uniform'))
         model.add(Activation('linear'))
 
-        rms = RMSprop()
-        model.compile(loss='mse', optimizer=rms)
+        if self.optimizer == 'rmsprop':
+            optimizer = RMSprop(self.learning_rate)
+        elif self.optimizer == 'adam':
+            optimizer = Adam(self.learning_rate)
+        elif self.optimizer == 'adadelta':
+            optimizer = Adadelta(self.learning_rate)
+        else:
+            print('no optimizer')
+        model.compile(loss='mse', optimizer=optimizer)
 
         if self.load_weights and self.weights_file is not None:
             if self.verbose:

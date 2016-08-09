@@ -64,9 +64,11 @@ class ProjectBecho(object):
     def get_action(self, state):
         # Choose an action.
         if random.random() < self.epsilon and self.enable_training is True:
+            print('random action')
             action = np.random.randint(0, self.num_actions)  # random
         else:
             # Get Q values for each action.
+            print('not random')
             qval = self.model.predict(state)
             action = (np.argmax(qval))
 
